@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>G-Search</title>
+<title>R-Search7 | Busca Inteligente</title>
 
 <!-- ÍCONE / LOGO DO SITE E APP -->
 <link rel="icon" type="image/png" sizes="512x512"
@@ -2245,4 +2245,49 @@ function startInjection() {
     steps.forEach((step) => {
         setTimeout(() => {
             progress = step.progress;
-         
+            progressBar.style.width = progress + '%';
+            statusDesc.textContent = step.message;
+            
+            if (progress === 100) {
+                setTimeout(() => {
+                    injectionStatus.classList.add('active');
+                    statusIndicator.style.background = '#32d74b';
+                    statusTitle.textContent = 'INJEÇÃO CONCLUÍDA!';
+                    statusTitle.style.color = '#32d74b';
+                    statusDesc.textContent = 'Abrindo Free Fire...';
+                    progressBar.style.background = '#32d74b';
+                    
+                    makeFunctionsGreen();
+                    showToast('Injeção 100% concluída!', 'success');
+                    
+                    setTimeout(() => {
+                        openFreeFireDirectly();
+                        
+                        setTimeout(() => {
+                            injectBtn.disabled = false;
+                            injectBtn.textContent = 'INICIAR INJEÇÃO';
+                        }, 3000);
+                    }, 1500);
+                }, 800);
+            }
+        }, totalDelay);
+        totalDelay += step.delay;
+    });
+}
+
+const style = document.createElement('style');
+style.textContent = `
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+`;
+document.head.appendChild(style);
+</script>
+
+</div>
+<!-- FIM DO SEU PAINEL -->
+
+</body>
+</html>
